@@ -19,11 +19,11 @@ library(arsenal)
 
 #load data
 #the pitcher bu OTU table (columns are ASVs (n=3376), rows are pitchers (n=515))
-asv <- read.csv("Data/final/pitcher_plant_ASV_table.csv", row=1)
+asv <- read.csv("Data/pitcher_plant_ASV_table.csv", row=1)
 dim(asv)
 
-#meta is the covariate data (n=11 varaibles/columns) associated with each pitcher (n=515 rows)
-meta <- read.csv("Data/final/pitcher_plant_meta_table.csv", row=1)
+#meta is the covariate data (n=11 variables/columns) associated with each pitcher (n=515 rows)
+meta <- read.csv("Data/pitcher_plant_meta_table.csv", row=1)
 
 
 #add pitcher covariates to asv table data 
@@ -56,7 +56,7 @@ xvars<-cbind(int = 1, xvars)
 #TSB prior
 
 
-#run lda with no covariates to assess group# (we did this with 10 goups and found that 6 groups contains >75% elements)
+#run lda with no covariates to assess group# (we did this with 10 groups and found that 6 groups contains >75% elements)
 set.seed(1)
 lda_no_covariates2=gibbs.LDA(y=comm2,
                              ncomm=6,#number of clusters to recover
@@ -68,7 +68,7 @@ lda_no_covariates2=gibbs.LDA(y=comm2,
 #save out LDA object
 #saveRDS(lda_no_covariates2, file = "Data/lda_no_cov_full_6.RDS")
 
-#call in lda object if not running
+#call in lda object if not running LDA above
 #lda_no_covariates2<-readRDS("Data/lda_no_cov_full_6.RDS")
 
 #check convergence (converges around 500 iterations)
@@ -83,7 +83,7 @@ rownames(theta)=rownames(comm2)
 head(round(theta,2))
 
 
-#assess cluster with box plot and histogtram
+#assess cluster with box plot and histogram
 boxplot(theta,ylab=expression(theta),xlab='Clusters',ylim=c(0,1))
 
 
