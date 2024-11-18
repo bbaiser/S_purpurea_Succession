@@ -5,34 +5,24 @@
 ####set up####
 
 #Install and load relevant packages 
-
-library(ggfortify)
-library(phyloseq)
 library(tidyverse)
 library(dplyr)
-library(ape)
-library(hillR)
-library(vegan)
-library(glmmTMB)
-library(DHARMa)
 library(ggplot2)
-library(MuMIn)
-library(performance)
-library(ggpubr)
+
 
 
 #data
 
 #the pitcher bu ASV table (columns are ASVs (n=3376), rows are pitchers (n=515))
-asv <- read.csv("Data/final/pitcher_plant_ASV_table.csv", row=1)
+asv <- read.csv("Data/pitcher_plant_ASV_table.csv", row=1)
 dim(asv)
 
 #meta is the covariate data (n=11 varaibles/columns) associated with each pitcher (n=515 rows)
-meta <- read.csv("Data/final/pitcher_plant_meta_table.csv", row=1)
+meta <- read.csv("Data/pitcher_plant_meta_table.csv", row=1)
 dim(meta)
                          
 #Taxonomic list of ASVs (n=3376)
-tax <- read.csv("Data/final/pitcher_plant_tax_table.csv", row=1)
+tax <- read.csv("Data/pitcher_plant_tax_table.csv", row=1)
 
 #change row names to a column for down stream         
 meta<-meta%>%
@@ -88,7 +78,7 @@ long <- asv_class %>%
        names_to = "Class",
        values_to = "Abundance")
                               
-#plot mean relative abundances of top ten asvs
+#plot mean relative abundances of top ten ASVs (Figure 2D) get integrated into panel with alpha diversity plots
 class <- ggplot(data=long, aes(x=Time, y=Abundance, color=Class)) + 
          geom_smooth( method = "loess", se = FALSE)+
          xlab("Time (days)")+
