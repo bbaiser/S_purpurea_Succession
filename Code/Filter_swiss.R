@@ -1,5 +1,5 @@
 #Remove Swiss data and make new ASV table, Metadata table, Taxonomic list 
-#and a Pruned phylogeny for use in all dwonstream analysis
+#and a Pruned phylogeny for use in all downstream analysis
 
 ####set up####
 #install packages 
