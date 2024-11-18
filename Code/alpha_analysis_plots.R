@@ -5,9 +5,6 @@
 #Install and load relevant packages 
 
 #install.packages("hillR", repos = c('https://daijiang.r-universe.dev', 'https://cloud.r-project.org'))
-#install.packages('TMB', type = 'source')
-BiocManager::install("phyloseq")
-
 library(ggfortify)
 library(phyloseq)
 library(tidyverse)
@@ -24,15 +21,15 @@ library(ggpubr)
 
 #load data
 #the pitcher bu OTU table (columns are ASVs (n=3376), rows are pitchers (n=515))
-asv <- read.csv("Data/final/pitcher_plant_ASV_table.csv", row=1)
+asv <- read.csv("Data/pitcher_plant_ASV_table.csv", row=1)
 dim(asv)
 
 #meta is the covariate data (n=11 varaibles/columns) associated with each pitcher (n=515 rows)
-meta <- read.csv("Data/final/pitcher_plant_meta_table.csv", row=1)
+meta <- read.csv("Data/pitcher_plant_meta_table.csv", row=1)
 str(meta) 
 
 #read in the individual PD files
-data_dir <- "C:/Users/bbaiser/OneDrive - University of Florida/Documents/GitHub/Pplant_succession/Data"#or the name of your directory where the pd files are
+data_dir <- "C:/Users/bbaiser/OneDrive - University of Florida/Documents/GitHub/S_purpurea_succession/Data"#or the name of your directory where the pd files are
 csv_files <- fs::dir_ls(data_dir, regexp = "PD_")#grab site PD files
 csv_files
 
@@ -49,7 +46,7 @@ q0<- hill_taxa(asv, q = 0, MARGIN = 1, base = exp(1))
 q1<- hill_taxa(asv, q = 1, MARGIN = 1, base = exp(1))
 q2<- hill_taxa(asv, q = 2, MARGIN = 1, base = exp(1)) 
 
-as.data.frame(q0)
+
 #make a data frame with all three metrics
 alpha_div<-cbind(q0, q1, q2)     
 
@@ -71,7 +68,7 @@ full_data<-merge(alpha_div,meta, by=0) %>% #merge with hill#'s
           drop_na()
 
 
-#z-scale model variables that are continiuos
+#z-scale model variables that are continuous
 for (i in 4:12) {
   full_data[, i] <- (full_data[, i] - mean(full_data[, i])) / sd(full_data[, i])
 }         
