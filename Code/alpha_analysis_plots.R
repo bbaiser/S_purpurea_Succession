@@ -24,7 +24,7 @@ library(ggpubr)
 asv <- read.csv("Data/pitcher_plant_ASV_table.csv", row=1)
 dim(asv)
 
-#meta is the covariate data (n=11 varaibles/columns) associated with each pitcher (n=515 rows)
+#meta is the covariate data (n=11 variables/columns) associated with each pitcher (n=515 rows)
 meta <- read.csv("Data/pitcher_plant_meta_table.csv", row=1)
 str(meta) 
 
@@ -60,7 +60,7 @@ full_data_raw<-merge(alpha_div,meta, by=0) %>% #merge with hill#'s
               rename("Time" = "Actual_Day")%>%
               drop_na()
 
-#this is for scaling an use in model
+#this is the scaled data for use in model
 full_data<-merge(alpha_div,meta, by=0) %>% #merge with hill#'s
           left_join(.,site_PD, by="Row.names")%>%#merge with PD from site pool
           column_to_rownames(var = "Row.names")%>%
@@ -538,7 +538,7 @@ mu <- eta
 
 
 #Get the standard errors
-SE   <- sqrt(diag(X %*%vcov(Mbestp)$cond %*% t(X))  )#hand calculates standard error
+SE   <- sqrt(diag(X %*%vcov(Mbestp)$cond %*% t(X))  )#hand calculate standard error
 seup <- eta + 1.96 * SE
 selo <- eta - 1.96 * SE
 
@@ -566,7 +566,7 @@ pd_midge<-ggplot(NewData, aes(x=midge, y=mu))+
                 plot.caption = element_text(hjust = 0))
 
 
-#make panel figure that includes class trajectories from 'class.plots.R'
+#make panel figure that includes class trajectories from 'class_mean_abund_plots.R'
 figure <- ggarrange(rich, pd_day, pd_midge,class,
                     labels = c("A)", "B)", "C)", "D)"),
                     ncol = 2, nrow = 2, common.legend = F)
