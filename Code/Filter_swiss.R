@@ -10,7 +10,7 @@ library(picante)
 
 
 #load data
-#these are the cleaned, filtered, and rarefied data from Jessica Berdardin in "MTM_Diversity_Analysis_2023.Rmd"
+#these are the cleaned, filtered, and rarefied data for all sites
 asv16s.physeq3 <- readRDS("Data/dMTM_asv16s.physeq3.RDS")
 
 #Taxonomic list
@@ -71,11 +71,11 @@ dim(meta) #515 samples
 dim(filtered_asv) #3376 ASV x 515 samples
 
 
-#save out processed data
-write.tree(pdTree,"Data/pitcher_plant_tree.nwk")
-write.csv( filtered_asv,"Data/pitcher_plant_ASV_table.csv")
-write.csv(meta, "Data/pitcher_plant_meta_table.csv")
-write.csv(filtered_tax,"Data/pitcher_plant_tax_table.csv")
+#save out processed data for use in all downstream analyses
+#write.tree(pdTree,"Data/pitcher_plant_tree.nwk")
+#write.csv( filtered_asv,"Data/pitcher_plant_ASV_table.csv")
+#write.csv(meta, "Data/pitcher_plant_meta_table.csv")
+#write.csv(filtered_tax,"Data/pitcher_plant_tax_table.csv")
 
 
 
