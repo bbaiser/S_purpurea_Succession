@@ -144,10 +144,10 @@ estimate.phi=TRUE)
 #save out lda object
 #saveRDS(lda_with_covariates2, file = "Data/dlda_with_cov_full_6.RDS")
 
-#read in lda object if not running
+#read in lda object if not running above
 lda_with_covariates2<-readRDS("Data/dlda_with_cov_full_6.RDS")
 
-# check convergance
+# check convergence
 plot(lda_with_covariates2$llk,type='l',xlab="iterations",ylab='log-likelihood')
 
 #theta matrix
@@ -157,8 +157,6 @@ theta <- tmp/rowSums(tmp)
 colnames(theta)=paste0('Cluster',1:6)
 rownames(theta)=rownames(comm2)
 head(round(theta,2))
-
-
 
 #plot theta matrix (Appendix S3:FigS2)
 data <- expand.grid(X=1:nrow(comm2), Y=1:6)
@@ -258,17 +256,17 @@ aux2<-data.frame(number,aux1)%>%
 aux3<- melt(aux2, id=c("number"))
 
 
-#plots individual groups. (you have to re)
+#plot group 1
 one<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
-  geom_density_ridges(scale=0.9) +
-  theme_ridges() + 
-  theme(legend.position = "N" ) +
-  xlab("") +
-  ylab("")+
-  ggtitle("Group 1")
+    geom_density_ridges(scale=0.9) +
+    theme_ridges() + 
+    theme(legend.position = "N" ) +
+    xlab("") +
+    ylab("")+
+    ggtitle("Group 1")
 
 
-#Format data for plotcluster/group 2
+#Format data for plot for cluster/group 2
 number <- 1:length(seq1)
 aux1 <- lda_with_covariates2$betas[seq1,12:20]#number reflect groups of 8 (i.e. 2-10, 12-20, etc)
 colnames(aux1)=colnames(xvars[,2:10])
@@ -277,7 +275,7 @@ aux2<-data.frame(number,aux1)%>%
 aux3<- melt(aux2, id=c("number"))
 
 
-#plots individual groups
+#plot group 2
 two<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   geom_density_ridges(scale=0.9) +
   theme_ridges() + 
@@ -286,7 +284,7 @@ two<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   ylab("")+
   ggtitle("Group 2")
 
-#Format data for plotcluster/group 3
+#Format data to plot cluster/group 3
 number <- 1:length(seq1)
 aux1 <- lda_with_covariates2$betas[seq1,22:30]#number reflect groups of 8 (i.e. 2-10, 12-20, etc)
 colnames(aux1)=colnames(xvars[,2:10])
@@ -295,7 +293,7 @@ aux2<-data.frame(number,aux1)%>%
 aux3<- melt(aux2, id=c("number"))
 
 
-#plots individual groups. 
+#plot group 3 
 three<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   geom_density_ridges(scale=0.9) +
   theme_ridges() + 
@@ -304,7 +302,7 @@ three<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   ylab("")+
   ggtitle("Group 3")
 
-#Format data for plot cluster/group 4
+#Format data to plot cluster/group 4
 number <- 1:length(seq1)
 aux1 <- lda_with_covariates2$betas[seq1,32:40]#number reflect groups of 8 (i.e. 2-10, 12-20, etc)
 colnames(aux1)=colnames(xvars[,2:10])
@@ -313,7 +311,7 @@ aux2<-data.frame(number,aux1)%>%
 aux3<- melt(aux2, id=c("number"))
 
 
-#plots individual groups
+#plot group 4
 four<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   geom_density_ridges(scale=0.9) +
   theme_ridges() + 
@@ -322,7 +320,7 @@ four<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   ylab("")+
   ggtitle("Group 4")
 
-#Format data for plot cluster/group 5
+#Format data to plot cluster/group 5
 number <- 1:length(seq1)
 aux1 <- lda_with_covariates2$betas[seq1,42:50]#number reflect groups of 8 (i.e. 2-10, 12-20, etc)
 colnames(aux1)=colnames(xvars[,2:10])
@@ -331,7 +329,7 @@ aux2<-data.frame(number,aux1)%>%
 aux3<- melt(aux2, id=c("number"))
 
 
-#plots individual groups
+#plot group 5
 five<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   geom_density_ridges(scale=0.9) +
   theme_ridges() + 
@@ -340,7 +338,7 @@ five<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
   ylab("")+
   ggtitle("Group 5")
 
-#Format data for plot cluster/group 6
+#Format data to plot cluster/group 6
 number <- 1:length(seq1)
 aux1 <- lda_with_covariates2$betas[seq1,52:60]#number reflect groups of 8 (i.e. 2-10, 12-20, etc)
 colnames(aux1)=colnames(xvars[,2:10])
@@ -349,7 +347,7 @@ aux2<-data.frame(number,aux1)%>%
 aux3<- melt(aux2, id=c("number"))
 
 
-#plots individual groups
+#plot group 6
 six<-ggplot(aux3, aes(x = value, y = variable, fill = variable)) +
     geom_density_ridges(scale=0.9) +
     theme_ridges() + 
