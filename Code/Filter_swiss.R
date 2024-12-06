@@ -1,5 +1,5 @@
-#Remove Swiss data and make new ASV table, Metadata table, Taxonomic list 
-#and a Pruned phylogeny for use in all downstream analysis
+#Data cleaning Script: Remove Swiss data and make new ASV table, 
+#Metadata table, Taxonomic list and a Pruned phylogeny for use in all downstream analysis
 
 ####set up####
 #install packages 
@@ -10,7 +10,8 @@ library(picante)
 
 
 #load data
-#these are the cleaned, filtered, and rarefied data for all sites
+
+#these are the cleaned, filtered, and rarefied data for all sites (including swiss data)
 asv16s.physeq3 <- readRDS("Data/dMTM_asv16s.physeq3.RDS")
 
 #Taxonomic list
@@ -19,12 +20,7 @@ tax <- as.data.frame(tax_table(asv16s.physeq3))
 #Phylogenetic tree for the ASVs
 asv16s.tree <-phy_tree(asv16s.physeq3) 
   
-
-
-
-
-
-#the pitcher bu OTU table (rows are ASVs (n=3806), columns are pitchers (n=693))
+#The pitcher by ASV table (rows are ASVs (n=3806), columns are pitchers (n=693))
 asv <- t(data.matrix((otu_table(asv16s.physeq3))))
 dim(asv)
 
@@ -47,7 +43,7 @@ comb_dat<-merge(asv,meta, by=0) %>% #merge asv with meta
           column_to_rownames(var = "Row.names")
 
 
-#separate our only pitcher-by-asv matrix and remove asvs with 0 col sum (likely swiss) (484 samples-by-3323 asvs)
+#separate our only pitcher-by-asv matrix and remove asvs with 0 col sum (likely swiss) 
 filtered_asv<-comb_dat[,1:3806]%>%#these are the columns that are ASVs
               select_if(negate(function(col) is.numeric(col) && sum(col) == 0))#remove asvs with 0 col sum
 
@@ -55,8 +51,6 @@ filtered_asv<-comb_dat[,1:3806]%>%#these are the columns that are ASVs
 #filter taxonomic table bsed on the asv
 filtered_tax<-tax %>%  
               filter(ASVs %in% colnames(filtered_asv)) 
-
-
 
 #Prune the Tree
 #prune tree asv table with swiss filtered out
