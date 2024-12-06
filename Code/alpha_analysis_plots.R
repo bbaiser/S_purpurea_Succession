@@ -280,7 +280,7 @@ Mbestq1<- glmmTMB(q1 ~ Time+
                   na.action = na.fail,
                   data = full_data)
 
-#check out full model
+#check out best-fit model
 summary(Mbestq1)
 check_collinearity(Mbestq1)#no colinearity
 AIC(Mbest)
@@ -337,7 +337,7 @@ Mfullq2_dsip <- glmmTMB(q2 ~ (Time) +I(Time^2)+
                         na.action = na.fail,
                         data = full_data)
 
-#check out full model
+#check out full model with dispersion
 summary(Mfullq2_dsip)
 check_collinearity(Mfullq2)#no colinearity
 
@@ -363,7 +363,7 @@ Mbestq2<- glmmTMB(q2 ~ Time+
                   na.action = na.fail,
                   data = full_data)
 
-#check out full model
+#check out best-fit model
 summary(Mbestq2)
 check_collinearity(Mbestq2)#no colinearity
 
@@ -454,7 +454,7 @@ Mbestp<- glmmTMB(site_SES_PD~ Time +
 #check out full model
 summary(Mbestp)
 check_collinearity(Mbestp)#no colinearity
-r.squaredGLMM(Mbestp) #R2m= 0.16, R2c=0.25
+r.squaredGLMM(Mbestp) #R2m= 0.16, R2c=0.27
 
 
 
